@@ -88,7 +88,7 @@ e-learning.exe -u xxxx -p xxxx -c 1
 8. requirements.txt - 依赖的库模块。
 9. right.html - 可用于手工修复答案。
 
-## 如何使用
+## 如何运行源代码
 
 
 程序的帮助信息：
@@ -126,7 +126,7 @@ python e-learning.py -u xxxx -p xxxx -c 1
 
 ## 小提示
 
-初次播放视频时，需要你手动允许浏览器加载 Flash,这个我有试过写代码让谷歌浏览器自动加载 Flash ，但试了多种途径都失败了。
+**初次播放视频时，需要你手动允许浏览器加载 Flash**,这个我有试过写代码让谷歌浏览器自动加载 Flash ，但试了多种途径都失败了。
 
 如果你可以实现，请一定告诉我这个二流子程序员，非常感谢。
 
@@ -140,4 +140,4 @@ python e-learning.py -u xxxx -p xxxx -c 1
 请勿用于商业用途。
 
 个人公众号 somenzz，专注于有价值的 Python 技术分享，欢迎订阅。
-个人微信号 somenzz，欢迎加好友与我交流。
+个人微信号 somenzz，欢迎交流。
