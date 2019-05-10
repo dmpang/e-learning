@@ -32,15 +32,15 @@ e-learning.exe -h
 Usage: e-learning.exe [-u] [-s] [-c] [-s] [fix]
 
 Options:
-  \-\-version             show program's version number and exit
-  -h, \-\-help            show this help message and exit
-  -u USERNAME, \-\-username=USERNAME
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -u USERNAME, --username=USERNAME
                         input your account name
-  -p PASSWORD, \-\-password=PASSWORD
+  -p PASSWORD, --password=PASSWORD
                         input your password
-  -c COURSE, \-\-course=COURSE
+  -c COURSE, --course=COURSE
                         learn which one ? [学习地图=0 我的课程=1]
-  -s SKIPNUM, \-\-skipnum=SKIPNUM
+  -s SKIPNUM, --skipnum=SKIPNUM
                         skip number,跳过开头多少个课程，防止卡住，一般不常用
 ```
 
@@ -52,13 +52,13 @@ e-learning.exe -u xxxx -p xxxx -c 0
 也可以这样执行：
 
 ```python
-e-learning.exe \-\-username xxxx \-\-password xxxx \-\-course 0
+e-learning.exe --username xxxx --password xxxx --course 0
 ```
 
 如果因为前面的视频无法自动播放，可选择跳过前面多少个课程，比如跳过前 2 个课程
 
 ```python
-e-learning.exe \-\-username xxxx \-\-password xxxx \-\-course 0 \-\-skipnum 2
+e-learning.exe --username xxxx --password xxxx --course 0 --skipnum 2
 #等同于
 e-learning.exe -u xxxx -p xxxx -c 0 -s 2
 ```
@@ -103,13 +103,13 @@ python e-learning.py -u xxxx -p xxxx -c 0
 也可以这样执行：
 
 ```python
-python e-learning.py \-\-username xxxx \-\-password xxxx \-\-course 0
+python e-learning.py --username xxxx --password xxxx --course 0
 ```
 
 如果因为前面的视频无法自动播放，可选择跳过前面多少个课程，比如跳过前 2 个课程
 
 ```python
-python e-learning.py \-\-username xxxx \-\-password xxxx \-\-course 0 \-\-skipnum 2
+python e-learning.py --username xxxx --password xxxx --course 0 --skipnum 2
 #等同于
 python e-learning.py -u xxxx -p xxxx -c 0 -s 2
 ```
