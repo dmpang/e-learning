@@ -21,9 +21,11 @@
 
 ## 不是 Python 程序员？
 
-程序已经编译成可执行文件，放在在压缩包 [e-learning.rar](/e-learning.rar) 中，可以在windows 系统直接运行。
+程序已经编译成可执行文件，放在在压缩包 [e-learning.rar](https://github.com/somenzz/e-learning/raw/master/e-learning.rar) 中，可以在windows 系统直接运行。
 
-解压后直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。具体使用方法如下：
+解压后直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。请确保电脑上安装有较新版本的谷歌浏览器，比如我的是 71.0.3578.98，这个版本附近的版本都可以。
+
+具体使用方法如下：
 
 程序的帮助信息：
 
