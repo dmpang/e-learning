@@ -32,15 +32,15 @@ e-learning.exe -h
 Usage: e-learning.exe [-u] [-s] [-c] [-s] [fix]
 
 Options:
-  --version             show program's version number and exit
-  -h, --help            show this help message and exit
-  -u USERNAME, --username=USERNAME
+  \-\-version             show program's version number and exit
+  -h, \-\-help            show this help message and exit
+  -u USERNAME, \-\-username=USERNAME
                         input your account name
-  -p PASSWORD, --password=PASSWORD
+  -p PASSWORD, \-\-password=PASSWORD
                         input your password
-  -c COURSE, --course=COURSE
-                        learn which one? [学习地图=0 我的课程=1]
-  -s SKIPNUM, --skipnum=SKIPNUM
+  -c COURSE, \-\-course=COURSE
+                        learn which one ? [学习地图=0 我的课程=1]
+  -s SKIPNUM, \-\-skipnum=SKIPNUM
                         skip number,跳过开头多少个课程，防止卡住，一般不常用
 ```
 
@@ -52,13 +52,13 @@ e-learning.exe -u xxxx -p xxxx -c 0
 也可以这样执行：
 
 ```python
-e-learning.exe --username xxxx --password xxxx --course 0
+e-learning.exe \-\-username xxxx \-\-password xxxx \-\-course 0
 ```
 
 如果因为前面的视频无法自动播放，可选择跳过前面多少个课程，比如跳过前 2 个课程
 
 ```python
-e-learning.exe --username xxxx --password xxxx --course 0 --skipnum 2
+e-learning.exe \-\-username xxxx \-\-password xxxx \-\-course 0 \-\-skipnum 2
 #等同于
 e-learning.exe -u xxxx -p xxxx -c 0 -s 2
 ```
@@ -76,23 +76,15 @@ e-learning.exe -u xxxx -p xxxx -c 1
 
 ## 程序源文件介绍
 
-1、answers.db - 保存所有的题目信息和正确答案。
-
-2、chromedriver.exe - 谷歌浏览器的驱动程序，只要你的浏览器版本较新都可以运行。比如我的是 71.0.3578.98。如果无法运行请更新谷歌浏览器。
-
-3、e-learning.py - 程序的核心程序。
-
-4、get_answer.py - 爬取答案的模块。
-
-5、info.log - 日志文件。
-
-6、insert_into_db.py - sqlite 交互的测试程序，练习用，可忽略。
-
-7、mini_shell.py - 可以直接写 SQL 查询 sqlite 数据库中的表和数据。
-
-8、requirements.txt - 依赖的库模块。
-
-9、right.html - 可用于手工修复答案。
+1. answers.db - 保存所有的题目信息和正确答案。
+2. chromedriver.exe - 谷歌浏览器的驱动程序，只要你的浏览器版本较新都可以运行。比如我的是 71.0.3578.98。如果无法运行请更新谷歌浏览器。
+3. e-learning.py - 程序的核心程序。
+4. get_answer.py - 爬取答案的模块。
+5. info.log - 日志文件。
+6. insert_into_db.py - sqlite 交互的测试程序，练习用，可忽略。
+7. mini_shell.py - 可以直接写 SQL 查询 sqlite 数据库中的表和数据。
+8. requirements.txt - 依赖的库模块。
+9. right.html - 可用于手工修复答案。
 
 ## 如何使用
 
@@ -111,13 +103,13 @@ python e-learning.py -u xxxx -p xxxx -c 0
 也可以这样执行：
 
 ```python
-python e-learning.py --username xxxx --password xxxx --course 0
+python e-learning.py \-\-username xxxx \-\-password xxxx \-\-course 0
 ```
 
 如果因为前面的视频无法自动播放，可选择跳过前面多少个课程，比如跳过前 2 个课程
 
 ```python
-python e-learning.py --username xxxx --password xxxx --course 0 --skipnum 2
+python e-learning.py \-\-username xxxx \-\-password xxxx \-\-course 0 \-\-skipnum 2
 #等同于
 python e-learning.py -u xxxx -p xxxx -c 0 -s 2
 ```
