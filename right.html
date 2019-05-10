@@ -1,0 +1,963 @@
+<body i18n-trigger="enables" style="background-color: rgb(239, 243, 245);">
+<script type="text/javascript">
+    var rightDataMap = {};
+    function setRightAnswer(h, v){
+        var data = rightDataMap[h];
+        if (data == null || data == undefined){
+            rightDataMap[h] = ''+$('#'+v).html();
+        }else{
+            rightDataMap[h] = rightDataMap[h] + ' ' + $('#'+v).html();
+        }
+    }
+</script>
+<header class="cs-header">
+    <div class="cs-container cs-header-wrap">
+        <button class="cs-close-btn pull-right cs-btn-head" type="button">关闭</button>
+        <h3 class="cs-header-title" title="在反腐倡廉方面做合格的共产党员" style="cursor:pointer;" data-id="9df1ac14fe41d6bf77764b3ffe6587c2">在反腐倡廉方面做合格的共产党员</h3>
+    </div>
+    <input type="hidden" id="fileHost" name="fileHost" value="">
+    <input type="hidden" id="courseExamCorpCode" value="jsnx">
+</header>
+<article class="cs-article cs-page-exam">
+	<script>
+		document.title = '在反腐倡廉方面做合格的共产党员';
+		// 是否为考试进行中
+		var isCourseExamming = false;
+	</script>
+	<nav class="cs-nav cs-container" id="courseInfoSteps">
+        <input type="hidden" id="corpCodeCqrcpx" value="jsnx">
+        <ul class="cs-nav-menu">
+            <li class="cs-count pull-right hide" id="timeClock">倒计时:<time class="cs-time-min cs-caution">00</time>分<time class="cs-time-sec cs-caution">00</time>秒</li>
+
+					 	<li class="cs-menu-item cs-menu-first 
+					 	
+					 	 cs-item-study
+					 	
+                        ">
+                        <a class="cs-menu-link" href="javascript:;" onclick="loadStudyStep('COURSE_COURSE_STUDY_VIEW')" title="课程学习" data-type="COURSE_COURSE_STUDY">1.课程学习</a>
+				 	</li>
+
+					 	<li class="cs-menu-item  
+					 	
+					 	
+					 	 cs-item-evaluate
+                        ">
+                        <a class="cs-menu-link" href="javascript:;" onclick="loadStudyStep('COURSE_EVALUATE_VIEW')" title="课程评估" data-type="COURSE_EVALUATE">2.课程评估</a>
+				 	</li>
+
+					 	<li class="cs-menu-item  cs-menu-last cs-item-active
+					 	
+					 	
+					 	
+                         cs-item-exam">
+             			<a class="cs-menu-link" href="javascript:;" onclick="loadStudyStep('COURSE_EXAM')" title="课后测试						" data-type="COURSE_EXAM">3.课后测试	                        </a>
+				 	</li>
+		</ul>
+	</nav>
+
+	<script>
+		var corpCode = 'jsnx';
+		//加载当前步骤的下一步
+		function goNextStep(state,nextStep){
+            if(nextStep == null){
+                nextStep = '';
+            }
+             loadStudyStep(nextStep,state);
+		}
+
+		//加载指定步骤查看
+		function loadStudyStep(type,state){
+             var courseFinished = 'true';
+            if(state != null && state == "finished"){
+                courseFinished = true;
+            }
+			// 课后测试，离开提示
+			if(typeof isCourseExamming!='undefined' && isCourseExamming && courseFinished == "false"){
+				alert("退出考试");
+			}else{
+                var _url;
+                if(type.indexOf("_VIEW") != -1 && !false){
+                    var methodName = getRealMethodName(type);
+                    _url = '/els/html/studyCourse/studyCourse.'+methodName+'.do?courseId=9df1ac14fe41d6bf77764b3ffe6587c2&willGoStep=' + type;
+                }else{
+                    _url = '/els/html/studyCourse/studyCourse.enterCourse.do?courseId=9df1ac14fe41d6bf77764b3ffe6587c2&willGoStep=' + type;
+                }
+                if (type=='COURSE_COURSE_STUDY_VIEW' && false){
+                    _url = "/els/html/studyCourse/studyCourse.enterCourse.do?courseId=9df1ac14fe41d6bf77764b3ffe6587c2&willGoStep=COURSE_COURSE_STUDY&courseType=NEW_COURSE_CENTER"
+				}
+                if(state != null && state == "finished"){
+                    _url = _url + "&courseFinished="+courseFinished;
+                }
+                if (CONFIG.hostDomain != undefined && CONFIG.hostDomain != "" && CONFIG.hostDomain != null) {
+                    if (CONFIG.hostDomain.indexOf("http") != -1) {
+                        _url = CONFIG.hostDomain + _url
+                    } else {
+                        _url = document.location.protocol + "//" + CONFIG.hostDomain + _url
+                    }
+
+                } else {
+                    _url = document.location.protocol + "//" + document.location.host + _url;
+                }
+				location.href = _url+'&courseType=NEW_COURSE_CENTER&elsSign=elnSessionId.5de7d37922e64591a6bb11aff9a7fbec';
+            }
+		}
+
+		$(function(){
+			$('#courseInfoSteps a').bind('click', function(e){
+				 e.preventDefault();
+			});
+			$("#courseInfoSteps").delegate("#goNextStep","click",function(){
+                goNextStep("COURSE_COURSE_STUDY","COURSE_EVALUATE");
+			});
+			// 关闭播放页事件，允许冒泡，后面还有一个点击事件用于保存学习进度
+			$("#goBack").click(function(){
+                var flashMovie = getFlashMovieObject("elnFlvPlayer");
+                if (flashMovie != null) {
+                    flashMovie.playToggle();
+                }
+
+                togglePlayState(false);
+                ncp.confirm({
+                    content: '确定要退出当前学习吗？',
+                    area: ['520px', '240px'],
+                    skin: 'ncp-layer-confirm',
+                    btn: ['取消', '确定'],
+                    onSure: function (index) {
+                        // 360极速浏览器貌似被屏蔽了，关闭不了
+                        window.close();
+                        layer.close(index);
+                    },
+                    onEnd: function () {
+                        togglePlayState(true, initialPlayState)
+                    }
+                })
+			});
+		});
+        //ie视频隐藏
+        var initialPlayState;
+        function togglePlayState(state,initialState){
+            //ie 和火狐下的wmv
+            var $palyerContainer=$("#palyerContainerId");
+            if(!!getFlashMovieObject("mPlayer")){
+                var _media = getFlashMovieObject("mPlayer");
+                if (!_media){
+                    return;
+                }
+                //playState：1停止，2暂停，3播放中
+                if(state){
+                    if(initialState ===3 && !!_media.controls){
+                        _media.controls.play();
+                    }
+                    $palyerContainer.removeClass("hideViaPosition");
+                    if(!!_media.playState){
+                        return _media.playState;
+                    }
+                }else{
+                    //隐藏前设置播放状态
+                    setWmvInitalState();
+                    $palyerContainer.addClass("hideViaPosition");
+                    !!_media.controls && _media.controls.pause();
+                }
+
+            }
+            //火狐ie10中的scorm url 类课程
+            if(!!window.isScorm || !!window.isUrlCourse){
+                if(state){
+                    $("#palyerContainerId,#urlCourseIframeId").removeClass("hideViaPosition");
+                }else{
+                    $("#palyerContainerId,#urlCourseIframeId").addClass("hideViaPosition");
+                }
+            }
+        }
+        function setWmvInitalState(){
+            var _mp=getFlashMovieObject("mPlayer");
+            if(!!document.documentMode && _mp){
+                initialPlayState=_mp.playState;
+            }
+        }
+		function getFlashMovieObject(movieName){
+            if (window.document[movieName]) {
+                return window.document[movieName];
+            }
+            if (navigator.appName.indexOf("Microsoft Internet") == -1) {
+                if (document.embeds && document.embeds[movieName]) {
+                    return document.embeds[movieName];
+                }
+            } else {
+                return document.getElementById(movieName);
+            }
+        }
+
+        //获取真正访问的action方法（action中的方法不能轻易修改方法名称）
+        function getRealMethodName(type) {
+            switch (type) {
+                case "COURSE_PRETEST_VIEW":
+                    return "viewPretestPage";
+                    break;
+                case "COURSE_COURSE_STUDY_VIEW":
+                    return "viewStudyPage";
+                    break;
+                case "COURSE_EVALUATE_VIEW":
+                    return "viewEvaluatePage";
+                    break;
+                case "COURSE_EXAM_VIEW":
+                    return "viewCourseExamPage";
+                    break;
+                case "STUDY_VALUE_VIEW":
+                    return "viewStudyValue";
+                    break;
+                case "BEHAVIOR_CHECK_VIEW":
+                    return "viewBehaviorCheck";
+                    break;
+                case "BEHAVIOR_CONVERT_VIEW":
+                    return "viewBehaviorConvert";
+                    break;
+                case "BEHAVIOR_EVALUATE_VIEW":
+                    return "viewBehaviorValuate";
+                    break;
+            }
+        }
+	</script>
+    <form class="cs-container cs-test cs-answer" method="get" action="javascript:;" id="courseInfoForm">
+        <div class="cs-test-head">
+            <h3 class="cs-test-title">课后测试</h3>
+            <p class="cs-test-instruction cs-test-limit">
+                测试成绩：<em>100.0</em>分。
+恭喜您顺利通过考试！            </p>
+
+        </div>
+
+            <div class="cs-test-wrap">
+                <h4 class="cs-test-type">单选题</h4>
+                <ul class="cs-test-list">
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>1</span>、（  ），指作为具有先进性的组织，它的纪律应高于法律。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="c7296225455e419f834157ba34f9f952_1" name="c7296225455e419f834157ba34f9f952" value="70ec908346a84e80bdffd8e46cc7066f" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_70ec908346a84e80bdffd8e46cc7066f">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="c7296225455e419f834157ba34f9f952_1">纪比法严</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_c7296225455e419f834157ba34f9f952', 'answer_item_70ec908346a84e80bdffd8e46cc7066f');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="c7296225455e419f834157ba34f9f952_2" name="c7296225455e419f834157ba34f9f952" value="22d1ba2a67d9464abe569146f9da1e58" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_22d1ba2a67d9464abe569146f9da1e58">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="c7296225455e419f834157ba34f9f952_2">党比法严</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="c7296225455e419f834157ba34f9f952_3" name="c7296225455e419f834157ba34f9f952" value="f3a9bb6960d84c978d109aadf4636770" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_f3a9bb6960d84c978d109aadf4636770">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="c7296225455e419f834157ba34f9f952_3">规比法严</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="c7296225455e419f834157ba34f9f952_4" name="c7296225455e419f834157ba34f9f952" value="32468292adb848f393c6e0b65d24219c" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_32468292adb848f393c6e0b65d24219c">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="c7296225455e419f834157ba34f9f952_4">以上皆是</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_c7296225455e419f834157ba34f9f952">A</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>2</span>、《中国共产党廉洁自律准则》是对党章规定的具体化，体现了（  ）实践成果。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="6dd370204b5044859c9526317594c9e0_1" name="6dd370204b5044859c9526317594c9e0" value="ca5b3fa3c1cd43699a570a1b2bc69f69" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_ca5b3fa3c1cd43699a570a1b2bc69f69">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="6dd370204b5044859c9526317594c9e0_1">全面建成小康社会</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="6dd370204b5044859c9526317594c9e0_2" name="6dd370204b5044859c9526317594c9e0" value="8a4fb67a010c4e2bbe31e9c5ee66e081" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_8a4fb67a010c4e2bbe31e9c5ee66e081">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="6dd370204b5044859c9526317594c9e0_2">全面依法治国</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="6dd370204b5044859c9526317594c9e0_3" name="6dd370204b5044859c9526317594c9e0" value="0b97986da9d44aa2a3b91ed9f8f9b52d" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_0b97986da9d44aa2a3b91ed9f8f9b52d">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="6dd370204b5044859c9526317594c9e0_3">全面从严治党</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_6dd370204b5044859c9526317594c9e0', 'answer_item_0b97986da9d44aa2a3b91ed9f8f9b52d');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="6dd370204b5044859c9526317594c9e0_4" name="6dd370204b5044859c9526317594c9e0" value="473b8e99b9e64d1d9b4e3aecc88fccb9" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_473b8e99b9e64d1d9b4e3aecc88fccb9">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="6dd370204b5044859c9526317594c9e0_4">全面深化改革</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_6dd370204b5044859c9526317594c9e0">C</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>3</span>、党的十八届中纪委（  ）次全会提出，要准确把握坚持党的领导、加强党的建设、全面从严治党、推进党风廉政建设和反腐败斗争之间的关系，明确内涵、厘清责任。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="8facecdc88024442a1fc94ea0d1c793a_1" name="8facecdc88024442a1fc94ea0d1c793a" value="728c31bbea5641ae8d5832f5e39a13a4" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_728c31bbea5641ae8d5832f5e39a13a4">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="8facecdc88024442a1fc94ea0d1c793a_1">三</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="8facecdc88024442a1fc94ea0d1c793a_2" name="8facecdc88024442a1fc94ea0d1c793a" value="8a42458b46de4d448685d56dcb731c11" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_8a42458b46de4d448685d56dcb731c11">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="8facecdc88024442a1fc94ea0d1c793a_2">四</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="8facecdc88024442a1fc94ea0d1c793a_3" name="8facecdc88024442a1fc94ea0d1c793a" value="02bde4d1023a44cd915866da2f8a61ed" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_02bde4d1023a44cd915866da2f8a61ed">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="8facecdc88024442a1fc94ea0d1c793a_3">五</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="8facecdc88024442a1fc94ea0d1c793a_4" name="8facecdc88024442a1fc94ea0d1c793a" value="405e5abd841b42e7a743430e7d643bf1" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_405e5abd841b42e7a743430e7d643bf1">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="8facecdc88024442a1fc94ea0d1c793a_4">六</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_8facecdc88024442a1fc94ea0d1c793a', 'answer_item_405e5abd841b42e7a743430e7d643bf1');
+                                    </script>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_8facecdc88024442a1fc94ea0d1c793a">D</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>4</span>、当前中纪委非常重视（  ）反腐，在中纪委监察部网站上特别开通了举报传区，而且设置了举报客户端。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="ed8b10af3e764ca083d7ccfe3c361544_1" name="ed8b10af3e764ca083d7ccfe3c361544" value="f6522fa172a64d798e58f76f1edf77da" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_f6522fa172a64d798e58f76f1edf77da">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="ed8b10af3e764ca083d7ccfe3c361544_1">信件</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="ed8b10af3e764ca083d7ccfe3c361544_2" name="ed8b10af3e764ca083d7ccfe3c361544" value="737fcdb528364cffb610608d555839c3" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_737fcdb528364cffb610608d555839c3">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="ed8b10af3e764ca083d7ccfe3c361544_2">网络</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_ed8b10af3e764ca083d7ccfe3c361544', 'answer_item_737fcdb528364cffb610608d555839c3');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="ed8b10af3e764ca083d7ccfe3c361544_3" name="ed8b10af3e764ca083d7ccfe3c361544" value="d6bcab83967042dcb67dba2ebceba143" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_d6bcab83967042dcb67dba2ebceba143">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="ed8b10af3e764ca083d7ccfe3c361544_3">信访</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="ed8b10af3e764ca083d7ccfe3c361544_4" name="ed8b10af3e764ca083d7ccfe3c361544" value="0cac7478f28642e69d59c42e586f5b88" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_0cac7478f28642e69d59c42e586f5b88">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="ed8b10af3e764ca083d7ccfe3c361544_4">电话</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_ed8b10af3e764ca083d7ccfe3c361544">B</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>5</span>、党风廉政建设和反腐败工作作为党和国家工作的重要组成部分，必须坚持党的基本路线，（  ），为深化改革、促进发展、维护稳定服务。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="583c70fd51154305820bbbe0eaafd0c5_1" name="583c70fd51154305820bbbe0eaafd0c5" value="34f98d37122e44ffb7291b7b331700d3" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_34f98d37122e44ffb7291b7b331700d3">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="583c70fd51154305820bbbe0eaafd0c5_1">与时俱进、改革创新</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="583c70fd51154305820bbbe0eaafd0c5_2" name="583c70fd51154305820bbbe0eaafd0c5" value="1c4d340517ff4d64ae839c880924e47d" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_1c4d340517ff4d64ae839c880924e47d">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="583c70fd51154305820bbbe0eaafd0c5_2">围绕中心、服务大局</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_583c70fd51154305820bbbe0eaafd0c5', 'answer_item_1c4d340517ff4d64ae839c880924e47d');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="583c70fd51154305820bbbe0eaafd0c5_3" name="583c70fd51154305820bbbe0eaafd0c5" value="0164ddc764d4419fa0eedf8303861afa" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_0164ddc764d4419fa0eedf8303861afa">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="583c70fd51154305820bbbe0eaafd0c5_3">实事求是、解放思想</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="583c70fd51154305820bbbe0eaafd0c5_4" name="583c70fd51154305820bbbe0eaafd0c5" value="4da84f4b660d450c9d2b563a47825c58" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_4da84f4b660d450c9d2b563a47825c58">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="583c70fd51154305820bbbe0eaafd0c5_4">标本兼治、综合治理</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_583c70fd51154305820bbbe0eaafd0c5">B</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>6</span>、中国共产党党员永远是劳动人民的（  ）一员。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="d6284dc893f54da1a2277c63dc3533ba_1" name="d6284dc893f54da1a2277c63dc3533ba" value="e894fd8a429c4145bb22d3e1dc43f6ee" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_e894fd8a429c4145bb22d3e1dc43f6ee">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="d6284dc893f54da1a2277c63dc3533ba_1">特色</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="d6284dc893f54da1a2277c63dc3533ba_2" name="d6284dc893f54da1a2277c63dc3533ba" value="8728adec15f545ac9d7988b4c938462c" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_8728adec15f545ac9d7988b4c938462c">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="d6284dc893f54da1a2277c63dc3533ba_2">特别</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="d6284dc893f54da1a2277c63dc3533ba_3" name="d6284dc893f54da1a2277c63dc3533ba" value="1043a966649b40d08b4099f00546f44c" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_1043a966649b40d08b4099f00546f44c">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="d6284dc893f54da1a2277c63dc3533ba_3">普通</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_d6284dc893f54da1a2277c63dc3533ba', 'answer_item_1043a966649b40d08b4099f00546f44c');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="d6284dc893f54da1a2277c63dc3533ba_4" name="d6284dc893f54da1a2277c63dc3533ba" value="ddd15fa5f1154f13906b0a03f0ab52a6" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_ddd15fa5f1154f13906b0a03f0ab52a6">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="d6284dc893f54da1a2277c63dc3533ba_4">一般</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_d6284dc893f54da1a2277c63dc3533ba">C</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>7</span>、除了法律和政策规定范围内的个人利益和工作职权以外，所有共产党员都不得谋求任何私利和（  ）。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="575db38755ff4c1fbab5ae39de4d4100_1" name="575db38755ff4c1fbab5ae39de4d4100" value="9aaf005e82c04736976ed773dcc2f323" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_9aaf005e82c04736976ed773dcc2f323">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="575db38755ff4c1fbab5ae39de4d4100_1">特权</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_575db38755ff4c1fbab5ae39de4d4100', 'answer_item_9aaf005e82c04736976ed773dcc2f323');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="575db38755ff4c1fbab5ae39de4d4100_2" name="575db38755ff4c1fbab5ae39de4d4100" value="22427208726b4a4abad5715fdc97d179" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_22427208726b4a4abad5715fdc97d179">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="575db38755ff4c1fbab5ae39de4d4100_2">职权</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="575db38755ff4c1fbab5ae39de4d4100_3" name="575db38755ff4c1fbab5ae39de4d4100" value="a88601eb20c14bed983e3f40d65435f1" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_a88601eb20c14bed983e3f40d65435f1">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="575db38755ff4c1fbab5ae39de4d4100_3">全权</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="575db38755ff4c1fbab5ae39de4d4100_4" name="575db38755ff4c1fbab5ae39de4d4100" value="875d04ab4d294edfa0f321e7f57277c5" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_875d04ab4d294edfa0f321e7f57277c5">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="575db38755ff4c1fbab5ae39de4d4100_4">无法确定</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_575db38755ff4c1fbab5ae39de4d4100">A</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>8</span>、（  ）举报、揭发和监督，是新时代人民群众监督权力的一个重要体现，是反腐败的利器。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="9d18f0d799ed4a94835379238281daea_1" name="9d18f0d799ed4a94835379238281daea" value="8ef77ff77e604ba2b16604a02baab8a1" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_8ef77ff77e604ba2b16604a02baab8a1">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="9d18f0d799ed4a94835379238281daea_1">信件</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="9d18f0d799ed4a94835379238281daea_2" name="9d18f0d799ed4a94835379238281daea" value="243d40af89634e169d31b4e317fe4b76" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_243d40af89634e169d31b4e317fe4b76">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="9d18f0d799ed4a94835379238281daea_2">网络</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_9d18f0d799ed4a94835379238281daea', 'answer_item_243d40af89634e169d31b4e317fe4b76');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="9d18f0d799ed4a94835379238281daea_3" name="9d18f0d799ed4a94835379238281daea" value="8e36d6080ad9424cbb4dbd8e2da225ef" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_8e36d6080ad9424cbb4dbd8e2da225ef">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="9d18f0d799ed4a94835379238281daea_3">信访</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="9d18f0d799ed4a94835379238281daea_4" name="9d18f0d799ed4a94835379238281daea" value="c9f5cb66e58146aa90579fc37a690b02" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_c9f5cb66e58146aa90579fc37a690b02">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="9d18f0d799ed4a94835379238281daea_4">电话</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_9d18f0d799ed4a94835379238281daea">B</span></p>
+                        </li>
+                        <li class="cs-test-item cs-item-single cs-item-first cs-test-correct">
+                            <h5 class="cs-test-question"><span>9</span>、党的十八大提出：健全（  ）制度，更加科学有效地防治腐败。严格执行党风廉政建设责任制。坚决查处大案要案，着力解决发生在群众身边的腐败问题。（<span class="sc-test-point">6.67 </span>分）</h5>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="77906d6e2d4d427b9a7743e5ada79151_1" name="77906d6e2d4d427b9a7743e5ada79151" value="bddcd0c7986c4c149035fe2b6c24228b" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_bddcd0c7986c4c149035fe2b6c24228b">A</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="77906d6e2d4d427b9a7743e5ada79151_1">反腐败法律</p>
+                                </div>
+                                    <script>
+                                        setRightAnswer('answer_77906d6e2d4d427b9a7743e5ada79151', 'answer_item_bddcd0c7986c4c149035fe2b6c24228b');
+                                    </script>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="77906d6e2d4d427b9a7743e5ada79151_2" name="77906d6e2d4d427b9a7743e5ada79151" value="507680c4c96e410bb9c84e9a6c32df73" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_507680c4c96e410bb9c84e9a6c32df73">B</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="77906d6e2d4d427b9a7743e5ada79151_2">反贪污受贿法律</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="77906d6e2d4d427b9a7743e5ada79151_3" name="77906d6e2d4d427b9a7743e5ada79151" value="ebf8c46a7a574804afb9bffd87727f24" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_ebf8c46a7a574804afb9bffd87727f24">C</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="77906d6e2d4d427b9a7743e5ada79151_3">反行贿法律</p>
+                                </div>
+                                <div class="cs-test-option ">
+                                    <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="77906d6e2d4d427b9a7743e5ada79151_4" name="77906d6e2d4d427b9a7743e5ada79151" value="7f8b8e9b378d4f49b0b8c4ae216cd367" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                        <mark class="cs-option-mark" id="answer_item_7f8b8e9b378d4f49b0b8c4ae216cd367">D</mark>
+                                    </p>
+                                    <p class="cs-option-row" for="77906d6e2d4d427b9a7743e5ada79151_4">反贪污腐败法律</p>
+                                </div>
+                                <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_77906d6e2d4d427b9a7743e5ada79151">A</span></p>
+                        </li>
+                </ul>
+			</div>
+                <div class="cs-test-wrap">
+                    <h4 class="cs-test-type">多选题</h4>
+                    <ul class="cs-test-list">
+                            <li class="cs-test-item cs-item-mult cs-test-correct">
+                                <h5 class="cs-test-question"><span>1</span>、各级党组织要担负起全面从严治党的主体责任，要做到（  ）。（<span class="sc-test-point">6.67 </span>分）
+                                </h5>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="0b436ec072c3416495ae7fc8c6f1a9ec_1" name="0b436ec072c3416495ae7fc8c6f1a9ec" value="1bfd679b4ca646d0b5f52294bb7046c2">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_1bfd679b4ca646d0b5f52294bb7046c2">A</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="0b436ec072c3416495ae7fc8c6f1a9ec_1">抓政治路线不偏航，少在决策环节出猫腻</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_0b436ec072c3416495ae7fc8c6f1a9ec', 'answer_item_1bfd679b4ca646d0b5f52294bb7046c2');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="0b436ec072c3416495ae7fc8c6f1a9ec_2" name="0b436ec072c3416495ae7fc8c6f1a9ec" value="91a020fd188544c198dc8a563445fd74">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_91a020fd188544c198dc8a563445fd74">B</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="0b436ec072c3416495ae7fc8c6f1a9ec_2">党要通过民主集中制来管理干部</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_0b436ec072c3416495ae7fc8c6f1a9ec', 'answer_item_91a020fd188544c198dc8a563445fd74');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="0b436ec072c3416495ae7fc8c6f1a9ec_3" name="0b436ec072c3416495ae7fc8c6f1a9ec" value="c1aec2a93dbd4bf0bd3ebf5c83ed6da2">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_c1aec2a93dbd4bf0bd3ebf5c83ed6da2">C</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="0b436ec072c3416495ae7fc8c6f1a9ec_3">落实党的纪律</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_0b436ec072c3416495ae7fc8c6f1a9ec', 'answer_item_c1aec2a93dbd4bf0bd3ebf5c83ed6da2');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="0b436ec072c3416495ae7fc8c6f1a9ec_4" name="0b436ec072c3416495ae7fc8c6f1a9ec" value="5ad78380578748ad93acc0a6f73750de">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_5ad78380578748ad93acc0a6f73750de">D</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="0b436ec072c3416495ae7fc8c6f1a9ec_4">党员和领导干部要坚定理想信念</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_0b436ec072c3416495ae7fc8c6f1a9ec', 'answer_item_5ad78380578748ad93acc0a6f73750de');
+                                        </script>
+                                    <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_0b436ec072c3416495ae7fc8c6f1a9ec">A B C D</span></p>
+                            </li>
+                            <li class="cs-test-item cs-item-mult cs-test-correct">
+                                <h5 class="cs-test-question"><span>2</span>、以下对“三严三实”的核心理解正确的是（  ）。（<span class="sc-test-point">6.67 </span>分）
+                                </h5>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="77379a9e02d64c30afc802a72d7a8eba_1" name="77379a9e02d64c30afc802a72d7a8eba" value="6acbd1fc0b124f9285a6cd622ad59b22">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_6acbd1fc0b124f9285a6cd622ad59b22">A</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="77379a9e02d64c30afc802a72d7a8eba_1">要全心全意地为人民服务，不要假心假意</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_77379a9e02d64c30afc802a72d7a8eba', 'answer_item_6acbd1fc0b124f9285a6cd622ad59b22');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="77379a9e02d64c30afc802a72d7a8eba_2" name="77379a9e02d64c30afc802a72d7a8eba" value="c2041343ae8641ecbef97957e107eb27">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_c2041343ae8641ecbef97957e107eb27">B</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="77379a9e02d64c30afc802a72d7a8eba_2">要不折不扣地向人民负责，不要“唯上、唯书”</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_77379a9e02d64c30afc802a72d7a8eba', 'answer_item_c2041343ae8641ecbef97957e107eb27');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="77379a9e02d64c30afc802a72d7a8eba_3" name="77379a9e02d64c30afc802a72d7a8eba" value="91e1c06453ba470681d611cf5a3604af">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_91e1c06453ba470681d611cf5a3604af">C</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="77379a9e02d64c30afc802a72d7a8eba_3">要真心实意地让人民作主，不要搞“长官意志”</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_77379a9e02d64c30afc802a72d7a8eba', 'answer_item_91e1c06453ba470681d611cf5a3604af');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-check">
+									<input checked="" disabled="" type="checkbox" id="77379a9e02d64c30afc802a72d7a8eba_4" name="77379a9e02d64c30afc802a72d7a8eba" value="7a522b885ca04b01938f45e7d121cb72">
+									<i class="cs-mult-checked" style="display: block;"></i>
+							    </span>
+                                            <mark class="cs-option-mark" id="answer_item_7a522b885ca04b01938f45e7d121cb72">D</mark>
+                                        </p>
+                                        <p class="cs-option-row" for="77379a9e02d64c30afc802a72d7a8eba_4">要自觉自愿地受人民监督，不要搞特殊化</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_77379a9e02d64c30afc802a72d7a8eba', 'answer_item_7a522b885ca04b01938f45e7d121cb72');
+                                        </script>
+                                    <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_77379a9e02d64c30afc802a72d7a8eba">A B C D</span></p>
+                            </li>
+                    </ul>
+                </div>
+                <div class="cs-test-wrap">
+                    <h4 class="cs-test-type">判断题</h4>
+                    <ul class="cs-test-list">
+                            <li class="cs-test-item cs-item-single cs-test-correct">
+                                <h5 class="cs-test-question"><span>1</span>、党性，是指一个政党固有的本质特性。（<span class="sc-test-point">6.67 </span>分）
+                                </h5>
+
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="cafd4d8a8c064b1ea69a6afec4f0a40b_1" name="cafd4d8a8c064b1ea69a6afec4f0a40b" value="def4789662484c7f90c9eb1314e7c6b8" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">A</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_def4789662484c7f90c9eb1314e7c6b8">正确</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_cafd4d8a8c064b1ea69a6afec4f0a40b', 'answer_item_def4789662484c7f90c9eb1314e7c6b8');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="cafd4d8a8c064b1ea69a6afec4f0a40b_2" name="cafd4d8a8c064b1ea69a6afec4f0a40b" value="3529d918f46a46e6a14830a753b1593b" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">B</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_3529d918f46a46e6a14830a753b1593b">错误</p>
+                                    </div>
+                                    <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_cafd4d8a8c064b1ea69a6afec4f0a40b">正确</span></p>
+                            </li>
+                            <li class="cs-test-item cs-item-single cs-test-correct">
+                                <h5 class="cs-test-question"><span>2</span>、一个官员的堕落腐败是绝对偶然与独立的。（<span class="sc-test-point">6.67 </span>分）
+                                </h5>
+
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="9d603b5eb8ab4d4598c1dfd610a771d5_1" name="9d603b5eb8ab4d4598c1dfd610a771d5" value="8ca52d1d137a40039faf9a3a67cb79a4" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">A</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_8ca52d1d137a40039faf9a3a67cb79a4">正确</p>
+                                    </div>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="9d603b5eb8ab4d4598c1dfd610a771d5_2" name="9d603b5eb8ab4d4598c1dfd610a771d5" value="0000e9f5d1b4467a9e93188f466410d3" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">B</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_0000e9f5d1b4467a9e93188f466410d3">错误</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_9d603b5eb8ab4d4598c1dfd610a771d5', 'answer_item_0000e9f5d1b4467a9e93188f466410d3');
+                                        </script>
+                                    <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_9d603b5eb8ab4d4598c1dfd610a771d5">错误</span></p>
+                            </li>
+                            <li class="cs-test-item cs-item-single cs-test-correct">
+                                <h5 class="cs-test-question"><span>3</span>、明晰党内法规体系是党员的基本常识。（<span class="sc-test-point">6.67 </span>分）
+                                </h5>
+
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="57878e4dc46d4ed4ae889a21553d7ad8_1" name="57878e4dc46d4ed4ae889a21553d7ad8" value="8ca2773c53774325b33d74db253598d2" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">A</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_8ca2773c53774325b33d74db253598d2">正确</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_57878e4dc46d4ed4ae889a21553d7ad8', 'answer_item_8ca2773c53774325b33d74db253598d2');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="57878e4dc46d4ed4ae889a21553d7ad8_2" name="57878e4dc46d4ed4ae889a21553d7ad8" value="a51bca487ada4c31b23266b3dafca07d" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">B</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_a51bca487ada4c31b23266b3dafca07d">错误</p>
+                                    </div>
+                                    <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_57878e4dc46d4ed4ae889a21553d7ad8">正确</span></p>
+                            </li>
+                            <li class="cs-test-item cs-item-single cs-test-correct">
+                                <h5 class="cs-test-question"><span>4</span>、2015年1月13日中纪委五次全会上，习近平总书记指出，反腐败斗争形势依然严峻复杂.（<span class="sc-test-point">6.62</span>分）
+                                </h5>
+
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input checked="" disabled="" type="radio" id="e213190628244ad4b683534c9f90b466_1" name="e213190628244ad4b683534c9f90b466" value="7fbd42482ac94ff294da51aafb593d63" class="cs-option-radio">
+									<i class="cs-radio-checked" style="display: block;">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">A</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_7fbd42482ac94ff294da51aafb593d63">正确</p>
+                                    </div>
+                                        <script>
+                                            setRightAnswer('answer_e213190628244ad4b683534c9f90b466', 'answer_item_7fbd42482ac94ff294da51aafb593d63');
+                                        </script>
+                                    <div class="cs-test-option ">
+                                        <p class="cs-option-cell">
+								<span class="cs-option-radio">
+									<input disabled="" type="radio" id="e213190628244ad4b683534c9f90b466_2" name="e213190628244ad4b683534c9f90b466" value="4d9da80ea9c64f51a020b2a20d2774c4" class="cs-option-radio">
+									<i class="cs-radio-checked">?</i>
+							    </span>
+                                            <mark class="cs-option-mark">B</mark>
+                                        </p>
+                                        <p class="cs-option-row" id="answer_item_4d9da80ea9c64f51a020b2a20d2774c4">错误</p>
+                                    </div>
+                                    <p class="cs-test-answer">正确答案:<span class="cs-answer-mark" id="answer_e213190628244ad4b683534c9f90b466">正确</span></p>
+                            </li>
+                    </ul>
+                </div>
+        <div class="cs-submit">
+        </div>
+        <div class="cs-after-again">
+            <p class="cs-again-text">如果您对课程内容还没有完全掌握，可以点击这里再次观看。</p>
+            <a href="javascript:;" class="cs-again-btn" data-id="9df1ac14fe41d6bf77764b3ffe6587c2"><span class="cs-again-icon"><i class="cs-again-triangle"></i></span>再次观看</a>
+        </div>
+    </form>
+</article>
+<script>
+    $(function(){
+        $('body').css({backgroundColor:'#eff3f5'});
+    })
+    $(".cs-answer-mark").each(function(){
+        var id = $(this).attr("id");
+        var data = rightDataMap[id];
+        $(this).html(data);
+    });
+
+    var resultView = (function(){return 'true'=='true'})();
+    var courseFinished = (function(){return 'true'=='true'})();
+    var examNotPassedDispose = "false";
+        examNotPassedDispose = true;
+
+    info = {
+        courseId:'9df1ac14fe41d6bf77764b3ffe6587c2',
+        examUserId:'',
+        examTime:'45',
+        currentStep: 'COURSE_EXAM',
+        getScore: '1',
+        infoStepToGetScore: 'COURSE_EXAM',
+        recordStepToGetScore:'COURSE_EXAM',
+        obtainScore:'1.0',
+        maxResitNum: 3,
+        courseStandard:'ONLINEPACKAGE',
+        filePath:'',
+        corpCode: 'jsnx',
+        nextStep:'',
+        current_server:'',
+        examNotPassedDispose:examNotPassedDispose
+    };
+    courseModule.newCourseExam(resultView,3,courseFinished,info);
+    /*修改结业条件，获得学分*/
+    if (info.currentStep=='COURSE_EXAM'
+            && (info.getScore=='' || info.getScore <= 0)
+            && ((info.infoStepToGetScore=='COURSE_EVALUATE')||(info.infoStepToGetScore=='COURSE_COURSE_STUDY'))) {
+        $.ajax({
+            url: CONFIG.ctx + 'html/study/study.updateScoreByDisableExam.do?courseType=NEW_COURSE_CENTER&courseId='+info.courseId,
+            success: function(d) {
+                if (d!=null && d && d!='' && d.courseScore!='' && Number(d.courseScore) > 0) {
+                    ncp.alert({
+                        content:'课程结业条件被修改，您当前已获得'+d.courseScore+'学分！',
+                        onSure:function(index){
+                            //下一句必须要
+                            layer.close(index);
+                        }
+                    });
+                }
+            }
+        })
+    }
+
+        $("#timeClock").addClass("hide");
+</script>
+
+
+<input norender="true" type="text" style="width: 0px; height: 0px; overflow: hidden; background: transparent; border: none; position: absolute; top: 0px; display: none;"><div id="_loading" style="display:none;"><span class="loading"></span>请稍侯...</div></body>
