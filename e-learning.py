@@ -81,11 +81,11 @@ class AutoLearning(object):
                 logger.info(f"已无法再进行翻页 {e}")
                 break
 
-    def get_learn_map(self, skip_num=0):
+    def get_learn_map(self, skip_num=0,learn_number = 1):
 
         self.browser.visit(self.map_url)
         time.sleep(3)
-        self.browser.find_by_xpath('//*[@id="trackList"]/ul/li/div[2]/div[2]/div[1]/a').first.click()
+        self.browser.find_by_xpath(f'//*[@id="trackList"]/ul/li[{learn_number}]/div[2]/div[2]/div[1]/a').first.click()
         time.sleep(3)
         regex = re.compile('<a href="#" id="(.*)" title="(.*)" class="innercan goCourseByStudy"')
         time.sleep(3)
@@ -495,6 +495,7 @@ if __name__ == '__main__':
     parser.add_option("-p", "--password", dest="password", help="input your password")
     parser.add_option("-c", "--course", dest="course", help="learn which one? [学习地图=0 我的课程=1]")
     parser.add_option("-s", "--skipnum", dest="skipnum", help="skip number,跳过开头多少个课程，防止卡住，一般不常用")
+    parser.add_option("-n", "--number", dest="number", help="number,学习地图中从上到下第几个要学的任务，默认为1")
 
     (options, args) = parser.parse_args()
     if options.username is None and args == []:
@@ -502,7 +503,7 @@ if __name__ == '__main__':
         parser.error("incorrect number of arguments or args.")
 
     skipNum = int(options.skipnum) if options.skipnum else 0
-
+    learnNum = int(options.number) if options.number else 1
     auto = AutoLearning(options.username,options.password)
     if args != [] and args[0]=="fix":
         print("使用 right.html 来修正答案")
@@ -510,7 +511,7 @@ if __name__ == '__main__':
         exit(0)
     auto.login()
     if options.course == '0':
-        auto.get_learn_map(skip_num=skipNum)
+        auto.get_learn_map(skip_num=skipNum,learn_number=learnNum)
     else:
         auto.get_my_courses(skip_num=skipNum)
     time.sleep(10)

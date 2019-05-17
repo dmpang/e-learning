@@ -21,11 +21,9 @@
 
 ## 不是 Python 程序员？
 
-程序已经编译成可执行文件，放在在压缩包 [e-learning.rar](https://github.com/somenzz/e-learning/raw/master/e-learning.rar) 中，可以在windows 系统直接运行。
+程序已经编译成可执行文件，放在在压缩包 [e-learning.rar](/e-learning.rar) 中，可以在windows 系统直接运行。
 
-解压后直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。请确保电脑上安装有较新版本的谷歌浏览器，比如我的是 71.0.3578.98，这个版本附近的版本都可以。
-
-具体使用方法如下：
+解压后直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。具体使用方法如下：
 
 程序的帮助信息：
 
@@ -41,9 +39,12 @@ Options:
   -p PASSWORD, --password=PASSWORD
                         input your password
   -c COURSE, --course=COURSE
-                        learn which one ? [学习地图=0 我的课程=1]
+                        learn which one? [学习地图=0 我的课程=1]
   -s SKIPNUM, --skipnum=SKIPNUM
                         skip number,跳过开头多少个课程，防止卡住，一般不常用
+  -n NUMBER, --number=NUMBER
+                        number,学习地图中从上到下第几个要学的任务，默认为1
+
 ```
 
 如果要学习【学习地图】可以这样执行：
@@ -56,6 +57,19 @@ e-learning.exe -u xxxx -p xxxx -c 0
 ```python
 e-learning.exe --username xxxx --password xxxx --course 0
 ```
+
+如果学习地图中有多个季度的任务需要学习，假如从上到下分别是第四季度、第三季度、第二季度，第一季度，对应的编号分别是 1，2，3，4
+因此，默认学习第四季度，如果要学习第三季度，则执行
+
+```python
+e-learning.exe --username xxxx --password xxxx --course 0 --number 2
+```
+学习第二季度，则执行
+
+```python
+e-learning.exe --username xxxx --password xxxx --course 0 --number 3
+```
+
 
 如果因为前面的视频无法自动播放，可选择跳过前面多少个课程，比如跳过前 2 个课程
 
@@ -78,17 +92,25 @@ e-learning.exe -u xxxx -p xxxx -c 1
 
 ## 程序源文件介绍
 
-1. answers.db - 保存所有的题目信息和正确答案。
-2. chromedriver.exe - 谷歌浏览器的驱动程序，只要你的浏览器版本较新都可以运行。比如我的是 71.0.3578.98。如果无法运行请更新谷歌浏览器。
-3. e-learning.py - 程序的核心程序。
-4. get_answer.py - 爬取答案的模块。
-5. info.log - 日志文件。
-6. insert_into_db.py - sqlite 交互的测试程序，练习用，可忽略。
-7. mini_shell.py - 可以直接写 SQL 查询 sqlite 数据库中的表和数据。
-8. requirements.txt - 依赖的库模块。
-9. right.html - 可用于手工修复答案。
+1、answers.db - 保存所有的题目信息和正确答案。
 
-## 如何运行源代码
+2、chromedriver.exe - 谷歌浏览器的驱动程序，只要你的浏览器版本较新都可以运行。比如我的是 71.0.3578.98。如果无法运行请更新谷歌浏览器。
+
+3、e-learning.py - 程序的核心程序。
+
+4、get_answer.py - 爬取答案的模块。
+
+5、info.log - 日志文件。
+
+6、insert_into_db.py - sqlite 交互的测试程序，练习用，可忽略。
+
+7、mini_shell.py - 可以直接写 SQL 查询 sqlite 数据库中的表和数据。
+
+8、requirements.txt - 依赖的库模块。
+
+9、right.html - 可用于手工修复答案。
+
+## 如何使用
 
 
 程序的帮助信息：
@@ -107,6 +129,18 @@ python e-learning.py -u xxxx -p xxxx -c 0
 ```python
 python e-learning.py --username xxxx --password xxxx --course 0
 ```
+如果学习地图中有多个季度的任务需要学习，假如从上到下分别是第四季度、第三季度、第二季度，第一季度，对应的编号分别是 1，2，3，4
+因此，默认学习第四季度，如果要学习第三季度，则执行
+
+```python
+python e-learning.py --username xxxx --password xxxx --course 0 --number 2
+```
+学习第二季度，则执行
+
+```python
+python e-learning.py --username xxxx --password xxxx --course 0 --number 3
+```
+
 
 如果因为前面的视频无法自动播放，可选择跳过前面多少个课程，比如跳过前 2 个课程
 
@@ -126,7 +160,7 @@ python e-learning.py -u xxxx -p xxxx -c 1
 
 ## 小提示
 
-**初次播放视频时，需要你手动允许浏览器加载 Flash**,这个我有试过写代码让谷歌浏览器自动加载 Flash ，但试了多种途径都失败了。
+初次播放视频时，需要你手动允许浏览器加载 Flash,这个我有试过写代码让谷歌浏览器自动加载 Flash ，但试了多种途径都失败了。
 
 如果你可以实现，请一定告诉我这个二流子程序员，非常感谢。
 
@@ -140,4 +174,5 @@ python e-learning.py -u xxxx -p xxxx -c 1
 请勿用于商业用途。
 
 个人公众号 somenzz，专注于有价值的 Python 技术分享，欢迎订阅。
-个人微信号 somenzz，欢迎交流。
+
+个人微信号 somenzz，欢迎加好友与我交流。
