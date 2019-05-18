@@ -23,11 +23,12 @@
 
 程序已经编译成可执行文件，放在在压缩包 [e-learning.rar](https://github.com/somenzz/e-learning/raw/master/e-learning.rar) 中，可以在windows 系统直接运行。
 
-解压后**打开cmd命令窗口，切换目录到 e-learning.exe 所在的位置，然后 cmd 窗口中直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。** 具体使用方法如下：
+解压后**打开cmd命令窗口，切换目录到 e-learning.exe 所在的位置，然后 cmd 窗口中直接运行 e-learning.exe ，后面加上一些参数即可。** 具体使用方法如下：
 
 程序的帮助信息：
 
 ```python
+cd #e-learning.exe 所在的位置
 e-learning.exe -h
 Usage: e-learning.exe [-u] [-s] [-c] [-s] [fix]
 
@@ -50,11 +51,13 @@ Options:
 如果要学习【学习地图】可以这样执行：
 
 ```python
+cd #e-learning.exe 所在的位置
 e-learning.exe -u xxxx -p xxxx -c 0
 ```
 也可以这样执行：
 
 ```python
+cd #e-learning.exe 所在的位置，下同
 e-learning.exe --username xxxx --password xxxx --course 0
 ```
 
@@ -116,6 +119,7 @@ e-learning.exe -u xxxx -p xxxx -c 1
 程序的帮助信息：
 
 ```python
+cd #e-learning.py 所在的位置,下同
 python e-learning.py -h
 ```
 
