@@ -23,7 +23,7 @@
 
 程序已经编译成可执行文件，放在在压缩包 [e-learning.rar](https://github.com/somenzz/e-learning/raw/master/e-learning.rar) 中，可以在windows 系统直接运行。
 
-解压后直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。具体使用方法如下：
+解压后**打开cmd命令窗口，切换目录到 e-learning.exe 所在的位置，然后 cmd 窗口中直接运行这个目录中的 e-learning.exe 文件，后面加上一些参数即可。** 具体使用方法如下：
 
 程序的帮助信息：
 
